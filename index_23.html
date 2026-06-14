@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English in Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    background: #FAF6F0;
+    color: #2B2A28;
+    min-height: 100vh;
+  }
+  .em-card { background: #fff; border: 1px solid #E8DFD3; border-radius: 14px; }
+  .em-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 600; background: #EFE6D8; color: #9C7A3C; }
+  .em-btn { cursor: pointer; border: none; font-family: inherit; transition: all 0.15s ease; }
+  .em-btn:hover { transform: translateY(-1px); }
+  .em-tab { cursor: pointer; padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 14px; border: none; background: transparent; color: #8A8378; transition: all 0.15s ease; display: flex; align-items: center; gap: 6px; }
+  .em-tab.active { background: #2B5B4D; color: #fff; }
+  .em-input { width: 100%; padding: 10px 14px; border: 1.5px solid #E8DFD3; border-radius: 8px; font-family: inherit; font-size: 14.5px; }
+  .em-input:focus { outline: none; border-color: #2B5B4D; }
+  .module-nav-item { cursor: pointer; padding: 12px 14px; border-radius: 10px; transition: background 0.15s; border: 1px solid transparent; margin-bottom: 4px; }
+  .module-nav-item:hover { background: #F2EBE0; }
+  .module-nav-item.active { background: #2B5B4D; color: #fff; }
+  .module-nav-item.active .module-sub { color: #C9DED6 !important; }
+
+  header.app-header {
+    background: linear-gradient(135deg, #2B5B4D 0%, #1F4439 100%);
+    color: #FAF6F0;
+    padding: 36px 24px;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+    align-items: flex-end; flex-wrap: wrap; gap: 16px;
+  }
+  .eyebrow { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9FCBBA; font-weight: 600; margin-bottom: 6px; }
+  h1.title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.01em; }
+  .subtitle { margin-top: 6px; color: #C9DED6; font-size: 15px; max-width: 480px; }
+  .progress-label { font-size: 13px; color: #9FCBBA; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+  .progress-bar-track { width: 160px; height: 8px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: #E8B25E; transition: width 0.4s ease; }
+  .progress-pct { font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; }
+
+  .layout { max-width: 1100px; margin: 0 auto; padding: 28px 24px; display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  .sidebar-card { padding: 14px; margin-bottom: 16px; }
+  .module-title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .module-sub { font-size: 12px; color: #A89F91; margin-top: 2px; }
+
+  .reset-btn { width: 100%; padding: 10px; border-radius: 10px; background: #fff; border: 1px solid #E8DFD3; color: #A8453E; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+  .module-header { padding: 24px; margin-bottom: 18px; }
+  .module-header-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  h2.module-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; }
+  .module-theme { color: #8A8378; margin-top: 6px; font-size: 15px; }
+  .complete-btn { padding: 10px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 600; border: 1.5px solid #2B5B4D; display: flex; align-items: center; gap: 6px; white-space: nowrap; background: #fff; color: #2B5B4D; }
+  .complete-btn.done { background: #2B5B4D; color: #fff; }
+
+  .tabs-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+
+  .content-card { padding: 26px; }
+  h3.section-title { font-family: 'Fraunces', serif; font-size: 20px; color: #2B5B4D; margin-bottom: 12px; }
+  .grammar-text { line-height: 1.7; color: #4A463F; font-size: 15.5px; }
+  .examples-label { font-size: 12.5px; font-weight: 700; color: #9C7A3C; text-transform: uppercase; letter-spacing: 0.06em; margin: 18px 0 10px; }
+  .example-box { background: #F7F2EA; border-left: 3px solid #E8B25E; padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 8px; font-size: 14.5px; font-style: italic; color: #4A463F; }
+
+  .vocab-row { display: flex; justify-content: space-between; padding: 12px 16px; background: #F7F2EA; border-radius: 10px; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .vocab-word { color: #2B5B4D; font-size: 15px; font-weight: 700; }
+  .vocab-meaning { color: #8A8378; font-size: 14px; }
+
+  .idiom-card { padding: 14px 18px; border-left: 3px solid #2B5B4D; margin-bottom: 12px; }
+  .idiom-phrase { font-weight: 700; font-size: 15.5px; margin-bottom: 4px; font-family: 'Fraunces', serif; }
+  .idiom-meaning { color: #8A8378; font-size: 14px; }
+  .idiom-tip { margin-top: 16px; padding: 14px; background: #FFF8E8; border-radius: 10px; font-size: 13.5px; color: #9C7A3C; }
+
+  .exercise-card { padding: 16px; background: #F7F2EA; border-radius: 10px; border: 1px solid transparent; margin-bottom: 14px; }
+  .exercise-card.done { background: #F1F7F4; border-color: #B8D9CB; }
+  .exercise-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .exercise-q { margin: 0; font-size: 15px; flex: 1; }
+  .exercise-num { color: #9C7A3C; }
+  .check-btn { background: none; flex-shrink: 0; cursor: pointer; border: none; }
+  .exercise-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .reveal-btn { background: none; color: #2B5B4D; font-size: 13px; font-weight: 600; padding: 0; border: none; cursor: pointer; }
+  .reveal-content { font-size: 13px; color: #8A8378; }
+
+  .training-card { padding: 18px; margin-bottom: 12px; }
+  .training-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .training-icon { background: #2B5B4D; color: #fff; border-radius: 8px; padding: 7px; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 16px; }
+  .training-title { font-size: 15.5px; font-family: 'Fraunces', serif; font-weight: 700; }
+  .training-text { font-size: 14px; color: #8A8378; line-height: 1.6; margin: 0 0 10px 0; }
+  .copy-btn { font-size: 12.5px; font-weight: 600; color: #2B5B4D; background: #F1F7F4; padding: 6px 12px; border-radius: 8px; border: 1px solid #B8D9CB; cursor: pointer; }
+
+  .nav-row { display: flex; justify-content: space-between; margin-top: 24px; }
+  .nav-btn { padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .nav-btn.prev { background: #fff; border: 1px solid #E8DFD3; color: #2B5B4D; }
+  .nav-btn.prev:disabled { color: #D8CFC2; cursor: default; }
+  .nav-btn.next { background: #2B5B4D; border: none; color: #fff; }
+  .nav-btn.next:disabled { color: #9FCBBA; cursor: default; }
+
+  .login-screen {
+    display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px;
+  }
+  .login-card { max-width: 380px; width: 100%; padding: 32px; text-align: center; }
+  .login-card h2 { font-family: 'Fraunces', serif; font-size: 24px; margin-bottom: 8px; color: #2B5B4D; }
+  .login-card p { color: #8A8378; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+  .login-btn { width: 100%; padding: 12px; border-radius: 10px; background: #2B5B4D; color: #fff; font-weight: 600; font-size: 15px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .login-btn:hover { background: #224a3e; }
+  .login-error { color: #A8453E; font-size: 13px; margin-top: 12px; }
+
+  /* Gamification */
+  .stats-row { display: flex; gap: 18px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+  .stat-chip { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #C9DED6; }
+  .stat-chip .stat-value { font-family: 'Fraunces', serif; font-weight: 700; font-size: 17px; color: #fff; }
+  .streak-flame { font-size: 16px; }
+  .streak-flame.cold { opacity: 0.4; filter: grayscale(1); }
+
+  .badges-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .badge { display: flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #F1F7F4; color: #2B5B4D; border: 1px solid #B8D9CB; }
+  .badge.locked { background: #F2EBE0; color: #C9BFAE; border-color: #E8DFD3; }
+
+  .xp-toast {
+    position: fixed; top: 20px; right: 20px; z-index: 1000;
+    background: #2B5B4D; color: #fff; padding: 12px 18px; border-radius: 12px;
+    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    animation: xpIn 0.3s ease, xpOut 0.3s ease 1.7s forwards;
+  }
+  @keyframes xpIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes xpOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
+
+  .module-complete-banner {
+    margin-top: 16px; padding: 18px; border-radius: 12px;
+    background: linear-gradient(135deg, #2B5B4D 0%, #1F4439 100%); color: #fff;
+    text-align: center; animation: bannerPop 0.4s ease;
+  }
+  @keyframes bannerPop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  .module-complete-banner .big { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .module-complete-banner .small { font-size: 13px; color: #C9DED6; }
+
+  /* Feedback states on exercises */
+  .feedback-box { margin-top: 10px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.5; }
+  .feedback-box.correct { background: #F1F7F4; color: #2B5B4D; border: 1px solid #B8D9CB; }
+  .feedback-box.close { background: #FFF8E8; color: #9C7A3C; border: 1px solid #F0DDB0; }
+  .feedback-box.incorrect { background: #FCEFED; color: #A8453E; border: 1px solid #F0CCC6; }
+  .check-answer-btn { padding: 8px 16px; border-radius: 8px; background: #2B5B4D; color: #fff; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+  .check-answer-btn:hover { background: #224a3e; }
+
+  .xp-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: #E8B25E; background: rgba(232,178,94,0.12); padding: 2px 8px; border-radius: 999px; margin-left: 8px; }
+
+  /* Matching game */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .match-grid { grid-template-columns: 1fr; } }
+  .match-col-label { font-size: 12.5px; font-weight: 700; color: #9C7A3C; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .match-item { padding: 12px 14px; border-radius: 10px; border: 1.5px solid #E8DFD3; background: #fff; font-size: 14px; cursor: pointer; margin-bottom: 8px; transition: all 0.15s ease; }
+  .match-item:hover { border-color: #2B5B4D; }
+  .match-item.selected { border-color: #2B5B4D; background: #F1F7F4; font-weight: 600; }
+  .match-item.matched { border-color: #B8D9CB; background: #F1F7F4; color: #2B5B4D; opacity: 0.6; cursor: default; }
+  .match-item.wrong { border-color: #E89B8E; background: #FCEFED; animation: shake 0.3s ease; }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+  .match-progress { text-align: center; margin-top: 16px; font-size: 13.5px; color: #8A8378; }
+
+  /* Error spotting */
+  .error-card { padding: 18px; margin-bottom: 14px; }
+  .error-text { font-size: 15px; line-height: 1.6; font-style: italic; color: #4A463F; background: #F7F2EA; padding: 12px 14px; border-radius: 8px; margin-bottom: 12px; }
+  .error-text .highlight { background: #FCEFED; color: #A8453E; font-weight: 700; padding: 0 2px; border-radius: 3px; font-style: normal; }
+  .error-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .error-word { padding: 6px 12px; border-radius: 8px; border: 1.5px solid #E8DFD3; background: #fff; font-size: 13.5px; cursor: pointer; transition: all 0.15s ease; }
+  .error-word:hover { border-color: #2B5B4D; }
+  .error-word.picked-correct { border-color: #2B5B4D; background: #F1F7F4; color: #2B5B4D; font-weight: 700; }
+  .error-word.picked-wrong { border-color: #E89B8E; background: #FCEFED; color: #A8453E; }
+  .error-solution { padding: 12px 14px; border-radius: 8px; background: #F1F7F4; border: 1px solid #B8D9CB; font-size: 13.5px; color: #2B5B4D; line-height: 1.5; }
+
+  /* Scenario */
+  .scenario-setup { background: #F7F2EA; border-left: 3px solid #E8B25E; padding: 14px 16px; border-radius: 0 8px 8px 0; margin-bottom: 18px; font-size: 14.5px; color: #4A463F; line-height: 1.6; }
+  .chat-bubble { max-width: 80%; padding: 12px 16px; border-radius: 14px; margin-bottom: 12px; font-size: 14.5px; line-height: 1.5; }
+  .chat-bubble.them { background: #F2EBE0; color: #4A463F; border-bottom-left-radius: 4px; }
+  .chat-bubble.you { background: #2B5B4D; color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+  .chat-speaker { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 4px; }
+  .chat-blank-area { margin-left: auto; max-width: 80%; }
+  .chat-textarea { width: 100%; padding: 12px 16px; border-radius: 14px; border: 1.5px solid #E8DFD3; font-family: inherit; font-size: 14.5px; resize: vertical; min-height: 60px; }
+  .chat-textarea:focus { outline: none; border-color: #2B5B4D; }
+  .scenario-hint { font-size: 12.5px; color: #9C7A3C; margin: 6px 0 0 0; }
+  .scenario-example-toggle { font-size: 12.5px; color: #2B5B4D; font-weight: 600; cursor: pointer; background: none; border: none; padding: 4px 0; margin-top: 4px; }
+  .scenario-example { background: #F1F7F4; border: 1px solid #B8D9CB; border-radius: 8px; padding: 10px 14px; font-size: 13.5px; color: #2B5B4D; margin-top: 6px; line-height: 1.5; }
+
+
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================================================
+   1) CONFIGURAÇÃO FIREBASE — SUBSTITUI ESTES VALORES
+   Vai a: Firebase Console > Configurações do Projeto > Geral
+   > As tuas apps > SDK setup and configuration > Config
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyAWzFzxEi_JITfU4NaJvJ96JZs3ypgY8vs",
+  authDomain: "english-in-motion-bc6b2.firebaseapp.com",
+  projectId: "english-in-motion-bc6b2",
+  storageBucket: "english-in-motion-bc6b2.firebasestorage.app",
+  messagingSenderId: "646741202378",
+  appId: "1:646741202378:web:f62c11c41c19bb9d7eeb33"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+const provider = new GoogleAuthProvider();
+
+/* =========================================================
+   2) DADOS DO CURSO
+   ========================================================= */
+const MODULES = [
+  {
+    id: 1, range: "Semanas 1-2", title: "Falar do Passado com Naturalidade",
+    theme: "Rotinas, experiências passadas, histórias do dia a dia",
+    grammar: {
+      heading: "Past Simple vs Present Perfect vs Past Perfect",
+      explanation: "Past Simple = ação terminada com tempo definido (I watched a movie yesterday). Present Perfect = ligação com o presente, sem tempo definido (I've watched that movie three times). Past Perfect = ação anterior a outra ação no passado (By the time I arrived, the movie had already started).",
+      examples: [
+        "I lived in Porto for five years. (acabou)",
+        "I've lived in Lisbon since 2020. (ainda vivo)",
+        "When I got home, my brother had already eaten dinner."
+      ]
+    },
+    vocab: [
+      { word: "afterwards", meaning: "depois, a seguir" },
+      { word: "eventually", meaning: "eventualmente, por fim" },
+      { word: "by the time", meaning: "quando, na altura em que" },
+      { word: "as soon as", meaning: "logo que" },
+      { word: "used to", meaning: "costumava (hábito passado)" }
+    ],
+    idioms: [
+      { phrase: "It slipped my mind", meaning: "Esqueci-me completamente" },
+      { phrase: "Long story short", meaning: "Resumindo a história" },
+      { phrase: "Out of the blue", meaning: "Do nada, inesperadamente" },
+      { phrase: "I used to... vs I would...", meaning: "Ambos para hábitos passados, 'would' não se usa com estados (be, have, like)" }
+    ],
+    exercises: [
+      { q: "Yesterday, by the time I got to the station, the train ___ (leave).", a: "had left", hint: "Past Perfect — ação anterior a outra no passado", commonWrong: { "left": "Quase! 'left' (Past Simple) sugere que as duas ações aconteceram ao mesmo tempo. Como o comboio já tinha partido ANTES de chegares, precisas do Past Perfect: 'had left'.", "has left": "Cuidado — 'has left' é Present Perfect, usado para ligação com o presente. Aqui estamos a falar de duas ações no passado, uma antes da outra: usa Past Perfect 'had left'." } },
+      { q: "I ___ (live) in this city for ten years and I still love it.", a: "have lived", hint: "Present Perfect — continua até agora", commonWrong: { "lived": "'Lived' (Past Simple) sugere que já não vives lá. Como 'I still love it' mostra que ainda vives aqui, usa Present Perfect: 'have lived'.", "live": "Falta o auxiliar! Para Present Perfect precisas de 'have/has' + particípio passado: 'have lived'." } },
+      { q: "When I was a kid, I ___ (play) football every weekend.", a: "used to play / would play", hint: "Hábito no passado", commonWrong: { "played": "'Played' está gramaticalmente correto, mas para hábitos repetidos no passado 'used to play' ou 'would play' soam mais naturais e enfatizam que já não é assim." }, acceptAlternatives: ["played"] },
+      { q: "She called me ___ (out of the blue) after years of silence.", a: "out of the blue", hint: "Idiom para 'do nada'" },
+      { q: "___ (long story short), we missed the flight.", a: "Long story short", hint: "Idiom para resumir" }
+    ],
+    matchingGame: [
+      { left: "It slipped my mind", right: "Esqueci-me completamente" },
+      { left: "Long story short", right: "Resumindo a história" },
+      { left: "Out of the blue", right: "Do nada, inesperadamente" },
+      { left: "Used to", right: "Costumava (hábito que já não existe)" },
+      { left: "By the time", right: "Quando, na altura em que" }
+    ],
+    errorSpotting: [
+      { text: "I have lived in Lisbon since five years and I love it here.", error: "since five years", fix: "for five years", explanation: "'Since' usa-se com um ponto no tempo (since 2020, since I was a child). 'For' usa-se com uma duração (for five years)." },
+      { text: "By the time we got to the cinema, the film already started.", error: "already started", fix: "had already started", explanation: "Como o filme começou ANTES de chegarem, precisa de Past Perfect: 'had already started'." },
+      { text: "When I was younger, I would have a dog called Rex.", error: "would have", fix: "used to have / had", explanation: "'Would' não se usa com verbos de estado (have, be, like, know). Para estados no passado usa 'used to have' ou simplesmente 'had'." }
+    ],
+    scenario: {
+      title: "Contar o que aconteceu no fim de semana",
+      setup: "Estás a falar com um colega de trabalho na segunda-feira de manhã. Ele pergunta-te como foi o teu fim de semana.",
+      dialogue: [
+        { speaker: "Colega", line: "Hey! How was your weekend?" },
+        { speaker: "Tu", blank: true, hint: "Conta algo que fizeste (Past Simple) + algo que já tinhas feito antes de outra coisa acontecer (Past Perfect)", example: "It was great! I went hiking on Saturday, and by the time I got home, my friends had already arrived for dinner." },
+        { speaker: "Colega", line: "That sounds fun! Have you done that hike before?" },
+        { speaker: "Tu", blank: true, hint: "Usa Present Perfect para experiência geral (have you ever...) + Past Simple para detalhe específico", example: "Yes, I've done it a few times, but this time the views were even better because the weather was perfect." }
+      ]
+    }
+  },
+  {
+    id: 2, range: "Semanas 3-4", title: "Planos, Intenções e Futuro",
+    theme: "Falar de planos, sonhos, intenções",
+    grammar: {
+      heading: "Going to vs Will vs Present Continuous (futuro) + Gerúndio vs Infinitivo",
+      explanation: "'Going to' para planos já decididos (I'm going to study tonight). 'Will' para decisões espontâneas ou previsões (I think it will rain). Present Continuous para planos com hora/data marcada (I'm meeting her at 6pm). Certos verbos pedem gerúndio (look forward to, enjoy, can't stand + -ing) e outros infinitivo (decide, plan, hope + to).",
+      examples: [
+        "I'm going to start a course next month. (decisão já tomada)",
+        "I'm meeting my sister on Friday. (compromisso marcado)",
+        "I'm looking forward to seeing you. (NÃO 'to see')",
+        "I've decided to learn Spanish next."
+      ]
+    },
+    vocab: [
+      { word: "look forward to + -ing", meaning: "estar ansioso por" },
+      { word: "can't stand + -ing", meaning: "não suportar" },
+      { word: "decide to / plan to / hope to", meaning: "decidir / planear / esperar (+ infinitivo)" },
+      { word: "intend to", meaning: "ter a intenção de" },
+      { word: "be about to", meaning: "estar prestes a" }
+    ],
+    idioms: [
+      { phrase: "I'm up for it", meaning: "Estou dentro / topo" },
+      { phrase: "Let's play it by ear", meaning: "Vamos ver como corre, decidir mais tarde" },
+      { phrase: "I'm torn between...", meaning: "Estou dividido entre..." },
+      { phrase: "Sooner rather than later", meaning: "Mais a breve do que tarde" }
+    ],
+    exercises: [
+      { q: "I'm really looking forward to ___ (see) you next week.", a: "seeing", hint: "look forward to + gerúndio", commonWrong: { "see": "Erro muito comum! 'Look forward to' é sempre seguido de gerúndio (-ing), nunca infinitivo. A forma correta é 'seeing'." } },
+      { q: "I can't stand ___ (wait) in long queues.", a: "waiting", hint: "can't stand + gerúndio", commonWrong: { "wait": "'Can't stand' pede gerúndio: 'waiting'. Pensa nele como 'enjoy' ou 'hate' — todos pedem -ing." } },
+      { q: "We haven't planned anything yet — let's ___ (idiom).", a: "play it by ear", hint: "Decidir mais tarde" },
+      { q: "I'm ___ (idiom) two job offers right now.", a: "torn between", hint: "Indeciso entre duas opções" },
+      { q: "She's ___ (be about to) leave when the phone rang.", a: "about to", hint: "Prestes a fazer algo", commonWrong: { "going to": "'Going to' funciona, mas a expressão pedida aqui é 'be about to' — algo a acontecer no momento imediato. A resposta certa é 'about to'." } }
+    ],
+    matchingGame: [
+      { left: "I'm up for it", right: "Estou dentro / topo" },
+      { left: "Let's play it by ear", right: "Vamos decidir mais tarde, ver como corre" },
+      { left: "I'm torn between...", right: "Estou dividido entre..." },
+      { left: "Sooner rather than later", right: "Mais a breve do que tarde" },
+      { left: "Be about to", right: "Estar prestes a" }
+    ],
+    errorSpotting: [
+      { text: "I'm looking forward to meet you at the conference.", error: "to meet", fix: "to meeting", explanation: "'Look forward to' é seguido de gerúndio: 'to meeting', não infinitivo." },
+      { text: "We're going to decide tomorrow — let's play it for ear.", error: "play it for ear", fix: "play it by ear", explanation: "A expressão correta é 'play it BY ear', não 'for ear'." },
+      { text: "I can't stand to wait for buses that never arrive.", error: "to wait", fix: "waiting", explanation: "'Can't stand' pede gerúndio (-ing), não infinitivo." }
+    ],
+    scenario: {
+      title: "Planear uma viagem com um amigo",
+      setup: "Estás a planear um fim de semana fora com um amigo. Ele pergunta-te sobre os teus planos.",
+      dialogue: [
+        { speaker: "Amigo", line: "Have you decided where we're going yet?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'I've decided to...' ou 'I'm torn between...' para mostrares indecisão entre duas opções", example: "I'm torn between the mountains and the coast — I haven't decided yet." },
+        { speaker: "Amigo", line: "Either sounds great to me. What time should we leave?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'let's play it by ear' ou 'I'm planning to...' / 'I'm going to...'", example: "Let's play it by ear — maybe early morning if the weather looks good." }
+      ]
+    }
+  },
+  {
+    id: 3, range: "Semanas 5-6", title: "Opiniões e Debate Ligeiro",
+    theme: "Dar opiniões, concordar/discordar, justificar pontos de vista",
+    grammar: {
+      heading: "Condicionais (1ª e 2ª)",
+      explanation: "1ª condicional = situações reais/possíveis no futuro (If it rains, I'll stay home). 2ª condicional = situações hipotéticas/improváveis no presente/futuro (If I had more time, I would learn another language). Repara: 'If I had' (não 'have'), e 'would' na segunda parte.",
+      examples: [
+        "If I have time tomorrow, I'll call you.",
+        "If I had more money, I would travel more.",
+        "If I were you, I wouldn't worry about it."
+      ]
+    },
+    vocab: [
+      { word: "in my view / as far as I'm concerned", meaning: "na minha opinião" },
+      { word: "I'd say that...", meaning: "Eu diria que..." },
+      { word: "to a certain extent", meaning: "até certo ponto" },
+      { word: "on the other hand", meaning: "por outro lado" },
+      { word: "it depends on", meaning: "depende de" }
+    ],
+    idioms: [
+      { phrase: "On the fence", meaning: "Indeciso" },
+      { phrase: "To play devil's advocate", meaning: "Defender o lado contrário só para debate" },
+      { phrase: "That's a fair point", meaning: "É um argumento válido" },
+      { phrase: "I see where you're coming from", meaning: "Entendo o teu ponto de vista" }
+    ],
+    exercises: [
+      { q: "If I ___ (have) more free time, I would travel more often.", a: "had", hint: "2ª condicional", commonWrong: { "have": "Em 2ª condicional, a parte 'if' usa Past Simple ('had'), mesmo falando do presente/futuro. 'Have' seria 1ª condicional, que tem outro significado (mais provável)." } },
+      { q: "If it ___ (rain) tomorrow, we'll cancel the picnic.", a: "rains", hint: "1ª condicional", commonWrong: { "will rain": "Em 1ª condicional, a parte com 'if' usa Present Simple ('rains'), não 'will'. O 'will' fica só na segunda parte da frase." } },
+      { q: "I'm still ___ (idiom) about whether to take the job.", a: "on the fence", hint: "Indeciso" },
+      { q: "I know you disagree, but ___ (idiom).", a: "that's a fair point", hint: "Reconhecer argumento válido" },
+      { q: "If I ___ (be) you, I would accept the offer.", a: "were", hint: "2ª condicional com 'be' — usa 'were' para todas as pessoas", commonWrong: { "was": "'Was' é usado informalmente, mas no inglês mais cuidado a 2ª condicional usa sempre 'were' com 'be', mesmo com 'I/he/she'." }, acceptAlternatives: ["was"] }
+    ],
+    matchingGame: [
+      { left: "On the fence", right: "Indeciso" },
+      { left: "To play devil's advocate", right: "Defender o lado contrário só para debate" },
+      { left: "That's a fair point", right: "É um argumento válido" },
+      { left: "I see where you're coming from", right: "Entendo o teu ponto de vista" },
+      { left: "As far as I'm concerned", right: "Na minha opinião" }
+    ],
+    errorSpotting: [
+      { text: "If I have more money, I would buy a new car right now.", error: "If I have", fix: "If I had", explanation: "Para falar de uma situação hipotética/improvável (2ª condicional), a parte 'if' usa Past Simple: 'If I had'." },
+      { text: "If it will rain tomorrow, we'll stay home.", error: "it will rain", fix: "it rains", explanation: "Na 1ª condicional, a parte 'if' usa Present Simple ('it rains'), não 'will'." },
+      { text: "I'm on the fence, but I'd say that this is a good idea to a certain grade.", error: "to a certain grade", fix: "to a certain extent", explanation: "A expressão correta é 'to a certain EXTENT', não 'grade'." }
+    ],
+    scenario: {
+      title: "Debate ligeiro sobre trabalho remoto",
+      setup: "Estás numa conversa informal com colegas sobre trabalho remoto vs presencial. Alguém faz uma pergunta para saber a tua opinião.",
+      dialogue: [
+        { speaker: "Colega", line: "Do you think people are more productive working from home?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'in my view' ou 'I'd say that...' + 'to a certain extent' para dares uma opinião equilibrada", example: "I'd say that, to a certain extent, yes — but it really depends on the type of work." },
+        { speaker: "Colega", line: "I see your point, but what about team collaboration? Isn't it harder remotely?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'that's a fair point' para reconheceres o argumento, depois 'on the other hand' para contrapores", example: "That's a fair point. On the other hand, video calls and shared documents make collaboration easier than people expect." }
+      ]
+    }
+  },
+  {
+    id: 4, range: "Semanas 7-8", title: "Storytelling e Descrição",
+    theme: "Contar histórias, descrever pessoas/lugares/situações",
+    grammar: {
+      heading: "Adjetivos Compostos, Advérbios de Intensidade e Narrative Tenses",
+      explanation: "Adjetivos compostos juntam duas palavras com hífen (a well-known author, a five-minute walk). Advérbios de intensidade dão cor à descrição (incredibly, absolutely, slightly). Narrative tenses (past simple, past continuous, past perfect) trabalham juntos para criar uma história com camadas temporais.",
+      examples: [
+        "It was a breathtaking view.",
+        "She was absolutely exhausted after the trip.",
+        "While I was walking home, it started raining."
+      ]
+    },
+    vocab: [
+      { word: "breathtaking", meaning: "deslumbrante" },
+      { word: "exhausted / thrilled / overwhelmed", meaning: "exausto / entusiasmado / sobrecarregado" },
+      { word: "slightly / incredibly / absolutely", meaning: "ligeiramente / incrivelmente / absolutamente" },
+      { word: "a -minute/-hour walk/drive", meaning: "adjetivo composto de duração" },
+      { word: "well-known / open-minded", meaning: "exemplos comuns de adjetivos compostos" }
+    ],
+    idioms: [
+      { phrase: "It was a blast", meaning: "Foi muito divertido" },
+      { phrase: "Once in a blue moon", meaning: "Muito raramente" },
+      { phrase: "To cut a long story short", meaning: "Resumindo" },
+      { phrase: "It cost me an arm and a leg", meaning: "Custou-me uma fortuna" }
+    ],
+    exercises: [
+      { q: "The hotel was a ten-___ walk from the beach.", a: "minute", hint: "Adjetivo composto: número + unidade no singular + hífen", commonWrong: { "minutes": "Quase! Em adjetivos compostos, a unidade fica no singular: 'ten-minute walk', não 'minutes'." } },
+      { q: "I'm ___ (incredibly) proud of what we achieved.", a: "incredibly", hint: "Advérbio de intensidade" },
+      { q: "We only meet ___ (idiom), maybe once a year.", a: "once in a blue moon", hint: "Muito raramente" },
+      { q: "The concert tickets ___ (idiom) — so expensive!", a: "cost me an arm and a leg", hint: "Custar uma fortuna" },
+      { q: "While I ___ (walk) to work, I bumped into an old friend.", a: "was walking", hint: "Past continuous para ação em curso interrompida", commonWrong: { "walked": "'Walked' (Past Simple) sugeriria que as duas ações aconteceram em sequência. Como estavas EM PROCESSO de caminhar quando encontraste o amigo, usa Past Continuous: 'was walking'." } }
+    ],
+    matchingGame: [
+      { left: "It was a blast", right: "Foi muito divertido" },
+      { left: "Once in a blue moon", right: "Muito raramente" },
+      { left: "To cut a long story short", right: "Resumindo" },
+      { left: "It cost me an arm and a leg", right: "Custou-me uma fortuna" },
+      { left: "Breathtaking", right: "Deslumbrante" }
+    ],
+    errorSpotting: [
+      { text: "We stayed in a five-minutes hotel near the airport.", error: "five-minutes", fix: "five-minute", explanation: "Em adjetivos compostos com número, a unidade fica no singular: 'five-minute', não 'five-minutes'." },
+      { text: "While I cooked dinner, the phone rang and I burned the rice.", error: "I cooked", fix: "I was cooking", explanation: "Para uma ação em curso interrompida por outra, usa Past Continuous: 'I was cooking'." },
+      { text: "The view from the top was absolute breathtaking.", error: "absolute breathtaking", fix: "absolutely breathtaking", explanation: "Antes de um adjetivo, usa o advérbio 'absolutely', não o adjetivo 'absolute'." }
+    ],
+    scenario: {
+      title: "Contar uma história de viagem",
+      setup: "Um amigo pergunta-te sobre a tua última viagem. Conta a história usando descrição vívida.",
+      dialogue: [
+        { speaker: "Amigo", line: "How was your trip to the mountains last month?" },
+        { speaker: "Tu", blank: true, hint: "Usa adjetivos compostos (a two-hour drive) e advérbios de intensidade (absolutely stunning)", example: "It was a two-hour drive, but the views were absolutely stunning once we arrived." },
+        { speaker: "Amigo", line: "Did anything funny or unexpected happen?" },
+        { speaker: "Tu", blank: true, hint: "Usa past continuous + past simple para contar uma história ('While I was..., something happened') e uma idiom do módulo", example: "While I was setting up the tent, it started raining out of nowhere — what a blast, though, once we got the fire going!" }
+      ]
+    }
+  },
+  {
+    id: 5, range: "Semanas 9-10", title: "Inglês Funcional do Dia a Dia",
+    theme: "Telefone, marcar consultas, pedir ajuda, pequenas negociações",
+    grammar: {
+      heading: "Modais de Pedido e Sugestão (Registo Formal vs Informal)",
+      explanation: "'Could you...?' e 'Would you mind...?' são mais formais/educados. 'Can you...?' é mais informal. 'I was wondering if...' é muito útil para pedidos delicados. 'Would you mind' é seguido de gerúndio.",
+      examples: [
+        "Could you send me the file, please?",
+        "Would you mind waiting a moment?",
+        "I was wondering if you could help me with this."
+      ]
+    },
+    vocab: [
+      { word: "Could you... / Would you mind + -ing", meaning: "Podia... / Importa-se de..." },
+      { word: "I was wondering if...", meaning: "Estava a pensar se..." },
+      { word: "to reschedule / to confirm / to cancel", meaning: "reagendar / confirmar / cancelar" },
+      { word: "to hold on / to put through", meaning: "aguardar / transferir chamada" },
+      { word: "I'd appreciate it if...", meaning: "Agradecia se..." }
+    ],
+    idioms: [
+      { phrase: "No worries", meaning: "Sem problema" },
+      { phrase: "I'll get back to you", meaning: "Eu dou-te uma resposta depois" },
+      { phrase: "Bear with me", meaning: "Tem paciência / aguarda um momento" },
+      { phrase: "Let me get this straight", meaning: "Deixa-me ver se entendi bem" }
+    ],
+    exercises: [
+      { q: "Would you mind ___ (open) the window?", a: "opening", hint: "Would you mind + gerúndio", commonWrong: { "open": "'Would you mind' é sempre seguido de gerúndio: 'opening', não infinitivo." }, acceptAlternatives: ["if I opened", "if I open"] },
+      { q: "I was ___ if you could call me back later.", a: "wondering", hint: "I was wondering if..." },
+      { q: "Sorry, ___ (idiom) — I need to check the calendar.", a: "bear with me", hint: "Pedir paciência" },
+      { q: "Thanks for letting me know — ___ (idiom).", a: "no worries", hint: "Sem problema" },
+      { q: "I don't have the answer now, but I'll ___ (idiom) tomorrow.", a: "get back to you", hint: "Responder mais tarde" }
+    ],
+    matchingGame: [
+      { left: "No worries", right: "Sem problema" },
+      { left: "I'll get back to you", right: "Eu dou-te uma resposta depois" },
+      { left: "Bear with me", right: "Tem paciência / aguarda um momento" },
+      { left: "Let me get this straight", right: "Deixa-me ver se entendi bem" },
+      { left: "I'd appreciate it if...", right: "Agradecia se..." }
+    ],
+    errorSpotting: [
+      { text: "Would you mind to close the door? It's a bit cold.", error: "to close", fix: "closing", explanation: "'Would you mind' é seguido de gerúndio ('closing'), não infinitivo." },
+      { text: "I was wondering you could send me the report by Friday.", error: "wondering you", fix: "wondering if you", explanation: "'I was wondering' precisa do 'if' antes de 'you could...': 'wondering if you could'." },
+      { text: "Sorry, can you bear me with a moment? I'm checking something.", error: "bear me with", fix: "bear with me", explanation: "A expressão correta é 'bear WITH me', não 'bear me with'." }
+    ],
+    scenario: {
+      title: "Reagendar uma reunião por telefone",
+      setup: "Precisas de telefonar a um colega para reagendar uma reunião que tens marcada para amanhã.",
+      dialogue: [
+        { speaker: "Colega", line: "Hi! What's up?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'I was wondering if...' para pedires algo educadamente", example: "Hi! I was wondering if we could reschedule tomorrow's meeting — something came up." },
+        { speaker: "Colega", line: "Sure, no problem. When would work for you?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'Would you mind...' ou 'I'd appreciate it if...' para sugerires uma nova data/hora", example: "Would you mind doing it on Thursday instead? I'd really appreciate it." }
+      ]
+    }
+  },
+  {
+    id: 6, range: "Semanas 11-12", title: "Consolidação: Séries, Música e Avaliação Final",
+    theme: "Shadowing, listening ativo e teste de fluência final",
+    grammar: {
+      heading: "Revisão Geral + Phrasal Verbs Comuns",
+      explanation: "Esta fase foca-se em consolidar tudo o que aprendeste através de conteúdo real (séries, música). Phrasal verbs comuns em diálogos: get over it (superar), come up with (encontrar/criar uma ideia), deal with (lidar com), figure out (perceber/resolver), put up with (tolerar).",
+      examples: [
+        "It took me a while to get over the disappointment.",
+        "She came up with a great idea.",
+        "I can't put up with this noise anymore."
+      ]
+    },
+    vocab: [
+      { word: "get over", meaning: "superar" },
+      { word: "come up with", meaning: "criar/encontrar (ideia)" },
+      { word: "deal with", meaning: "lidar com" },
+      { word: "figure out", meaning: "perceber, resolver" },
+      { word: "put up with", meaning: "tolerar, aguentar" }
+    ],
+    idioms: [
+      { phrase: "(recolhidas do teu conteúdo)", meaning: "Durante este módulo, regista 4-5 expressões que ouvires na série/música escolhida e traz para revisão." }
+    ],
+    exercises: [
+      { q: "It took her months to ___ (get over) the loss.", a: "get over", hint: "Superar" },
+      { q: "We need to ___ (come up with) a new plan.", a: "come up with", hint: "Criar uma ideia" },
+      { q: "I can't ___ (put up with) this anymore.", a: "put up with", hint: "Tolerar" },
+      { q: "Can you ___ (figure out) what's wrong with this?", a: "figure out", hint: "Resolver/perceber" },
+      { q: "He has a lot on his plate, but he always ___ (deal with) it well.", a: "deals with", hint: "Lidar com", commonWrong: { "deal with": "Quase! Com 'he', na 3ª pessoa do singular no Present Simple, o verbo leva 's': 'deals with'." } }
+    ],
+    matchingGame: [
+      { left: "Get over", right: "Superar" },
+      { left: "Come up with", right: "Criar/encontrar (ideia)" },
+      { left: "Deal with", right: "Lidar com" },
+      { left: "Figure out", right: "Perceber, resolver" },
+      { left: "Put up with", right: "Tolerar, aguentar" }
+    ],
+    errorSpotting: [
+      { text: "It took him a long time to get over of the breakup.", error: "get over of", fix: "get over", explanation: "'Get over' já inclui a ideia de 'superar algo' — não precisa de 'of' depois." },
+      { text: "We came up a great idea during the meeting.", error: "came up a", fix: "came up with a", explanation: "A expressão correta é 'come up WITH', não apenas 'come up'." },
+      { text: "She figured the problem out finally and fixed it.", error: "figured the problem out", fix: "finally figured the problem out", explanation: "Não é bem um erro gramatical, mas 'finally' fica mais natural antes do phrasal verb: 'finally figured out the problem' ou 'figured out the problem, finally'." }
+    ],
+    scenario: {
+      title: "Conversa sobre uma série que estás a ver",
+      setup: "Estás a falar com um amigo sobre uma série/filme que viste recentemente, usando phrasal verbs naturais.",
+      dialogue: [
+        { speaker: "Amigo", line: "Have you finished that series you were talking about?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'figure out' ou 'come up with' para descrever a trama/personagens", example: "Yes! It took me a while to figure out what was really going on, but the ending made sense." },
+        { speaker: "Amigo", line: "No spoilers, but was it worth it?" },
+        { speaker: "Tu", blank: true, hint: "Usa 'get over' ou 'put up with' para dares a tua opinião final", example: "Definitely — I had to put up with a slow start, but once it picked up, I couldn't stop watching." }
+      ]
+    }
+  }
+];
+
+const TRAINING_PROMPTS = [
+  {
+    icon: "💬",
+    title: "Simulação de Conversa Real",
+    text: "Vamos simular uma conversa em inglês sobre [tema do módulo]. Faz de conta que somos colegas/amigos a falar casualmente. Faz-me perguntas, reage ao que digo, e corrige-me discretamente no final com um resumo de erros."
+  },
+  {
+    icon: "✏️",
+    title: "Feedback de Escrita Estruturado",
+    text: "Aqui está um texto que escrevi sobre [tema]: [colar texto]. Por favor: 1) corrige erros gramaticais e explica porquê de forma simples, 2) sugere versões mais naturais, 3) dá-me uma nota estimada de nível (A2/B1/B2)."
+  },
+  {
+    icon: "🔊",
+    title: "Prática de Pronúncia",
+    text: "Quero praticar pronúncia. Dá-me 5 frases curtas com as expressões idiomáticas do Módulo [X], com fonética simplificada. Vou gravar-me a dizê-las e quero feedback."
+  }
+];
+
+/* =========================================================
+   3) ÍCONES SVG simples (substituem lucide-react)
+   ========================================================= */
+const icons = {
+  check: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  circle: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>`,
+  reset: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`,
+  prev: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`,
+  next: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
+  google: `<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 16 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 16 4 9.1 8.6 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.5l-6.5-5.5C29.5 35 26.9 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.6 5.1C9 39.5 15.9 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6.5 5.5C41.8 36 44 30.5 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>`
+};
+
+const BADGES = [
+  { id: "m0", icon: "🌱", name: "Primeiros Passos", condition: (p) => p.completedModules[0] },
+  { id: "m1", icon: "🚀", name: "Em Movimento", condition: (p) => p.completedModules[1] },
+  { id: "m2", icon: "💬", name: "Opinador", condition: (p) => p.completedModules[2] },
+  { id: "m3", icon: "📖", name: "Contador de Histórias", condition: (p) => p.completedModules[3] },
+  { id: "m4", icon: "📞", name: "Comunicador", condition: (p) => p.completedModules[4] },
+  { id: "m5", icon: "🏆", name: "Fluente em Movimento", condition: (p) => p.completedModules[5] },
+  { id: "streak3", icon: "🔥", name: "3 Dias Seguidos", condition: (p) => (p.streak || 0) >= 3 },
+  { id: "streak7", icon: "⚡", name: "1 Semana de Streak", condition: (p) => (p.streak || 0) >= 7 },
+  { id: "xp100", icon: "⭐", name: "100 XP", condition: (p) => (p.xp || 0) >= 100 },
+  { id: "xp500", icon: "🌟", name: "500 XP", condition: (p) => (p.xp || 0) >= 500 },
+  { id: "perfectionist", icon: "✅", name: "30 Exercícios Concluídos", condition: (p) => Object.values(p.completedExercises || {}).filter(Boolean).length >= 30 },
+  { id: "matcher", icon: "🧩", name: "Mestre da Associação", condition: (p) => Object.keys(p.completedGames || {}).filter(k => k.endsWith("-matching")).length >= 3 },
+  { id: "detective", icon: "🔍", name: "Detetive de Erros", condition: (p) => Object.keys(p.completedGames || {}).filter(k => k.includes("-error-")).length >= 5 },
+  { id: "actor", icon: "🎭", name: "Ator de Cenários", condition: (p) => Object.keys(p.completedGames || {}).filter(k => k.endsWith("-scenario")).length >= 3 }
+];
+
+const XP_EXERCISE_FIRST_TRY = 10;
+const XP_EXERCISE_RETRY = 5;
+const XP_MODULE_COMPLETE = 50;
+const XP_MATCHING_GAME = 15;
+const XP_ERROR_SPOTTING = 10;
+const XP_SCENARIO = 20;
+
+/* =========================================================
+   4) ESTADO DA APLICAÇÃO
+   ========================================================= */
+let state = {
+  user: null,
+  loaded: false,
+  syncStatus: "loading", // loading | synced | saving | error
+  activeModule: 0,
+  view: "overview",
+  progress: { completedExercises: {}, completedModules: {}, notes: {}, xp: 0, streak: 0, lastStudyDate: null, earnedBadges: {} },
+  answers: {},
+  revealed: {},
+  checkedAnswers: {},
+  xpToast: null,
+  newBadgeToast: null,
+  // Phase 2 state (per-module, reset on module change)
+  matchSelected: { side: null, idx: null },
+  matchMatched: {}, // idx of left items that are matched
+  matchWrong: null,
+  errorPicks: {}, // exerciseIdx -> { word, correct }
+  scenarioAnswers: {}, // "modIdx-lineIdx" -> text
+  scenarioExampleShown: {},
+  matchRightOrder: null // shuffled array of indices for right column
+};
+
+let saveTimeout = null;
+
+function setState(patch) {
+  state = { ...state, ...patch };
+  render();
+}
+
+/* =========================================================
+   5) FIREBASE: AUTH + FIRESTORE
+   ========================================================= */
+function normalizeProgress(p) {
+  return {
+    completedExercises: p.completedExercises || {},
+    completedModules: p.completedModules || {},
+    completedGames: p.completedGames || {}, // e.g. "1-matching", "1-scenario-0", "1-error-2"
+    notes: p.notes || {},
+    xp: p.xp || 0,
+    streak: p.streak || 0,
+    lastStudyDate: p.lastStudyDate || null,
+    earnedBadges: p.earnedBadges || {}
+  };
+}
+
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function yesterdayStr() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().slice(0, 10);
+}
+
+// Updates streak based on today's activity. Returns updated progress.
+function applyStreak(progress) {
+  const today = todayStr();
+  if (progress.lastStudyDate === today) return progress; // already counted today
+  let streak = progress.streak || 0;
+  if (progress.lastStudyDate === yesterdayStr()) {
+    streak += 1;
+  } else {
+    streak = 1;
+  }
+  return { ...progress, streak, lastStudyDate: today };
+}
+
+// Awards XP and checks for new badges. Returns { progress, newBadges }
+function awardXP(progress, amount) {
+  let p = applyStreak(progress);
+  p = { ...p, xp: (p.xp || 0) + amount };
+  const newBadges = [];
+  const earnedBadges = { ...p.earnedBadges };
+  BADGES.forEach(b => {
+    if (!earnedBadges[b.id] && b.condition(p)) {
+      earnedBadges[b.id] = true;
+      newBadges.push(b);
+    }
+  });
+  p = { ...p, earnedBadges };
+  return { progress: p, newBadges };
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    setState({ user, syncStatus: "loading" });
+    try {
+      const ref = doc(db, "progress", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        setState({ progress: normalizeProgress(snap.data().progress || {}), loaded: true, syncStatus: "synced" });
+      } else {
+        setState({ progress: normalizeProgress({}), loaded: true, syncStatus: "synced" });
+      }
+    } catch (e) {
+      console.error(e);
+      setState({ progress: normalizeProgress({}), loaded: true, syncStatus: "error" });
+    }
+  } else {
+    setState({ user: null, loaded: false });
+  }
+});
+
+async function saveProgress() {
+  if (!state.user || !state.loaded) return;
+  setState({ syncStatus: "saving" });
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(async () => {
+    try {
+      const ref = doc(db, "progress", state.user.uid);
+      await setDoc(ref, { progress: state.progress, updatedAt: Date.now() });
+      setState({ syncStatus: "synced" });
+    } catch (e) {
+      console.error(e);
+      setState({ syncStatus: "error" });
+    }
+  }, 400);
+}
+
+window.handleLogin = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (e) {
+    document.getElementById("login-error").textContent = "Erro ao iniciar sessão: " + e.message;
+  }
+};
+
+window.handleLogout = async () => {
+  await signOut(auth);
+  setState({
+    user: null, loaded: false,
+    progress: normalizeProgress({}),
+    activeModule: 0, view: "overview", answers: {}, revealed: {}, checkedAnswers: {}
+  });
+};
+
+/* =========================================================
+   6) AÇÕES
+   ========================================================= */
+window.selectModule = (idx) => {
+  setState({
+    activeModule: idx, view: "overview",
+    matchSelected: { side: null, idx: null }, matchMatched: {}, matchWrong: null, matchRightOrder: null
+  });
+};
+
+window.setView = (v) => setState({ view: v });
+
+window.toggleExercise = (mIdx, eIdx) => {
+  const key = `${mIdx}-${eIdx}`;
+  const completedExercises = { ...state.progress.completedExercises };
+  const wasCompleted = completedExercises[key];
+  completedExercises[key] = !wasCompleted;
+
+  let progress = { ...state.progress, completedExercises };
+
+  if (!wasCompleted) {
+    const wasChecked = state.checkedAnswers[key];
+    const amount = (wasChecked && wasChecked.firstTryCorrect) ? XP_EXERCISE_FIRST_TRY : XP_EXERCISE_RETRY;
+    const result = awardXP(progress, amount);
+    progress = result.progress;
+    showXpToast(amount, result.newBadges);
+  }
+
+  setState({ progress });
+  saveProgress();
+};
+
+window.toggleModuleComplete = (mIdx) => {
+  const completedModules = { ...state.progress.completedModules };
+  const wasCompleted = completedModules[mIdx];
+  completedModules[mIdx] = !wasCompleted;
+
+  let progress = { ...state.progress, completedModules };
+
+  if (!wasCompleted) {
+    const result = awardXP(progress, XP_MODULE_COMPLETE);
+    progress = result.progress;
+    showXpToast(XP_MODULE_COMPLETE, result.newBadges, true);
+  }
+
+  setState({ progress });
+  saveProgress();
+};
+
+// Checks a typed answer against the expected answer(s), returns feedback type
+window.checkAnswer = (mIdx, eIdx) => {
+  const key = `${mIdx}-${eIdx}`;
+  const ex = MODULES[mIdx].exercises[eIdx];
+  const userAnswer = (state.answers[key] || "").trim().toLowerCase();
+  const correctAnswers = ex.a.split("/").map(s => s.trim().toLowerCase());
+  const alternatives = (ex.acceptAlternatives || []).map(s => s.toLowerCase());
+
+  let status = "incorrect";
+  let message = null;
+
+  if (correctAnswers.includes(userAnswer) || alternatives.includes(userAnswer)) {
+    status = "correct";
+  } else if (ex.commonWrong) {
+    const matchKey = Object.keys(ex.commonWrong).find(k => k.toLowerCase() === userAnswer);
+    if (matchKey) {
+      status = "close";
+      message = ex.commonWrong[matchKey];
+    }
+  }
+
+  const checkedAnswers = { ...state.checkedAnswers };
+  const isFirstCheck = !(key in state.checkedAnswers);
+  const firstTryCorrect = isFirstCheck ? (status === "correct") : checkedAnswers[key].firstTryCorrect;
+  checkedAnswers[key] = { status, message, firstTryCorrect };
+
+  setState({ checkedAnswers });
+
+  // Auto-mark as done if correct and not already done
+  if (status === "correct" && !state.progress.completedExercises[key]) {
+    window.toggleExercise(mIdx, eIdx);
+  }
+};
+
+function showXpToast(amount, newBadges, isModule) {
+  const toast = { amount, isModule, id: Date.now() };
+  setState({ xpToast: toast });
+  setTimeout(() => {
+    if (state.xpToast && state.xpToast.id === toast.id) setState({ xpToast: null });
+  }, 2000);
+  if (newBadges && newBadges.length > 0) {
+    setTimeout(() => {
+      setState({ newBadgeToast: newBadges[0] });
+      setTimeout(() => setState({ newBadgeToast: null }), 3000);
+    }, 600);
+  }
+}
+
+// Award XP for a one-off game/activity, only if not already completed
+function completeGameOnce(gameKey, amount) {
+  if (state.progress.completedGames[gameKey]) return;
+  const completedGames = { ...state.progress.completedGames, [gameKey]: true };
+  let progress = { ...state.progress, completedGames };
+  const result = awardXP(progress, amount);
+  progress = result.progress;
+  showXpToast(amount, result.newBadges);
+  setState({ progress });
+  saveProgress();
+}
+
+/* ---- Matching game ---- */
+window.matchSelect = (side, idx) => {
+  const mod = MODULES[state.activeModule];
+  const items = mod.matchingGame;
+
+  if (state.matchMatched[idx] !== undefined && side === "left") return; // already matched
+
+  const sel = state.matchSelected;
+
+  if (sel.side === null) {
+    setState({ matchSelected: { side, idx }, matchWrong: null });
+    return;
+  }
+
+  if (sel.side === side) {
+    // re-select on same side
+    setState({ matchSelected: { side, idx }, matchWrong: null });
+    return;
+  }
+
+  // Different sides selected -> check match
+  const leftIdx = side === "left" ? idx : sel.idx;
+  const rightIdx = side === "right" ? idx : sel.idx;
+
+  if (leftIdx === rightIdx) {
+    // Correct match (since right items are shuffled but keep same index mapping)
+    const matchMatched = { ...state.matchMatched, [leftIdx]: true };
+    setState({ matchMatched, matchSelected: { side: null, idx: null }, matchWrong: null });
+
+    // Check if all matched
+    if (Object.keys(matchMatched).length === items.length) {
+      completeGameOnce(`${state.activeModule}-matching`, XP_MATCHING_GAME);
+    }
+  } else {
+    setState({ matchWrong: { leftIdx, rightIdx } });
+    setTimeout(() => {
+      setState({ matchSelected: { side: null, idx: null }, matchWrong: null });
+    }, 600);
+  }
+};
+
+/* ---- Error spotting ---- */
+window.pickErrorWord = (exIdx, word) => {
+  const mod = MODULES[state.activeModule];
+  const item = mod.errorSpotting[exIdx];
+  const isCorrect = word.toLowerCase() === item.error.toLowerCase();
+
+  const errorPicks = { ...state.errorPicks, [exIdx]: { word, correct: isCorrect } };
+  setState({ errorPicks });
+
+  if (isCorrect) {
+    completeGameOnce(`${state.activeModule}-error-${exIdx}`, XP_ERROR_SPOTTING);
+  }
+};
+
+/* ---- Scenario ---- */
+window.updateScenarioAnswer = (key, value) => {
+  state.scenarioAnswers[key] = value;
+};
+
+window.toggleScenarioExample = (key) => {
+  const scenarioExampleShown = { ...state.scenarioExampleShown };
+  scenarioExampleShown[key] = !scenarioExampleShown[key];
+  setState({ scenarioExampleShown });
+};
+
+window.completeScenario = (mIdx) => {
+  completeGameOnce(`${mIdx}-scenario`, XP_SCENARIO);
+};
+
+window.toggleReveal = (key) => {
+  const revealed = { ...state.revealed };
+  revealed[key] = !revealed[key];
+  setState({ revealed });
+};
+
+window.updateAnswer = (key, value) => {
+  state.answers[key] = value; // no re-render needed for typing
+};
+
+window.resetProgress = async () => {
+  if (!confirm("Tens a certeza que queres reiniciar todo o progresso?")) return;
+  const fresh = normalizeProgress({});
+  setState({ progress: fresh, answers: {}, revealed: {}, checkedAnswers: {} });
+  if (state.user) {
+    try {
+      const ref = doc(db, "progress", state.user.uid);
+      await setDoc(ref, { progress: fresh, updatedAt: Date.now() });
+    } catch (e) {}
+  }
+};
+
+window.copyPrompt = (text) => {
+  navigator.clipboard && navigator.clipboard.writeText(text);
+};
+
+window.prevModule = () => setState({ activeModule: Math.max(0, state.activeModule - 1), view: state.view, matchSelected: { side: null, idx: null }, matchMatched: {}, matchWrong: null, matchRightOrder: null });
+window.nextModule = () => setState({ activeModule: Math.min(MODULES.length - 1, state.activeModule + 1), view: state.view, matchSelected: { side: null, idx: null }, matchMatched: {}, matchWrong: null, matchRightOrder: null });
+
+/* =========================================================
+   7) RENDER
+   ========================================================= */
+function moduleDoneCount(mIdx) {
+  const m = MODULES[mIdx];
+  return m.exercises.filter((_, eIdx) => state.progress.completedExercises[`${mIdx}-${eIdx}`]).length;
+}
+
+function syncLabel() {
+  switch (state.syncStatus) {
+    case "saving": return "· a guardar...";
+    case "synced": return "· guardado";
+    case "error": return "· erro ao guardar";
+    default: return "";
+  }
+}
+
+function render() {
+  const app = document.getElementById("app");
+
+  // --- LOGIN SCREEN ---
+  if (!state.user) {
+    app.innerHTML = `
+      <div class="login-screen">
+        <div class="em-card login-card">
+          <h2>English in Motion</h2>
+          <p>Inicia sessão com a tua conta Google para guardares o teu progresso e aceder de qualquer dispositivo.</p>
+          <button class="login-btn" onclick="handleLogin()">${icons.google} Entrar com Google</button>
+          <div id="login-error" class="login-error"></div>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // --- LOADING ---
+  if (!state.loaded) {
+    app.innerHTML = `<div class="login-screen"><p style="color:#8A8378;">A carregar o teu progresso...</p></div>`;
+    return;
+  }
+
+  const mod = MODULES[state.activeModule];
+  const totalExercises = MODULES.reduce((acc, m) => acc + m.exercises.length, 0);
+  const totalDone = Object.values(state.progress.completedExercises).filter(Boolean).length;
+  const overallPct = Math.round((totalDone / totalExercises) * 100);
+
+  // Sidebar modules
+  const sidebarHtml = MODULES.map((m, idx) => {
+    const done = moduleDoneCount(idx);
+    const isComplete = state.progress.completedModules[idx];
+    const activeClass = state.activeModule === idx ? "active" : "";
+    const iconColor = isComplete ? (state.activeModule === idx ? "#E8B25E" : "#2B5B4D") : (state.activeModule === idx ? "#C9DED6" : "#D8CFC2");
+    return `
+      <div class="module-nav-item ${activeClass}" onclick="selectModule(${idx})">
+        <div class="module-title-row">
+          <div style="font-size:14px; font-weight:600;">Módulo ${m.id}</div>
+          <span style="color:${iconColor}; display:flex;">${isComplete ? icons.check : icons.circle}</span>
+        </div>
+        <div class="module-sub">${m.range} · ${done}/${m.exercises.length} exercícios</div>
+      </div>
+    `;
+  }).join("");
+
+  // Tabs
+  const tabs = [
+    { key: "overview", label: "Gramática", icon: "📘" },
+    { key: "vocab", label: "Vocabulário", icon: "✨" },
+    { key: "idioms", label: "Expressões", icon: "💬" },
+    { key: "exercises", label: "Exercícios", icon: "✏️" },
+    { key: "matching", label: "Jogo de Associação", icon: "🧩" },
+    { key: "errors", label: "Encontra o Erro", icon: "🔍" },
+    { key: "scenario", label: "Cenário", icon: "🎭" },
+    { key: "training", label: "Prompts de Treino", icon: "🤖" },
+  ];
+  const tabsHtml = tabs.map(t => `
+    <button class="em-tab em-btn ${state.view === t.key ? "active" : ""}" onclick="setView('${t.key}')">
+      <span>${t.icon}</span> ${t.label}
+    </button>
+  `).join("");
+
+  // View content
+  let viewHtml = "";
+  if (state.view === "overview") {
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">${mod.grammar.heading}</h3>
+        <p class="grammar-text">${mod.grammar.explanation}</p>
+        <div class="examples-label">Exemplos no contexto</div>
+        ${mod.grammar.examples.map(ex => `<div class="example-box">${ex}</div>`).join("")}
+      </div>
+    `;
+  } else if (state.view === "vocab") {
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">Vocabulário-chave</h3>
+        ${mod.vocab.map(v => `
+          <div class="vocab-row">
+            <span class="vocab-word">${v.word}</span>
+            <span class="vocab-meaning">${v.meaning}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  } else if (state.view === "idioms") {
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">Expressões idiomáticas</h3>
+        ${mod.idioms.map(idiom => `
+          <div class="em-card idiom-card">
+            <div class="idiom-phrase">"${idiom.phrase}"</div>
+            <div class="idiom-meaning">${idiom.meaning}</div>
+          </div>
+        `).join("")}
+        <div class="idiom-tip">💡 Regra de oro: não avances de módulo sem conseguires usar pelo menos 3 destas expressões numa frase tua, sem ajuda.</div>
+      </div>
+    `;
+  } else if (state.view === "exercises") {
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">Exercícios práticos</h3>
+        ${mod.exercises.map((ex, i) => {
+          const key = `${state.activeModule}-${i}`;
+          const isDone = state.progress.completedExercises[key];
+          const isRevealed = state.revealed[key];
+          const iconColor = isDone ? "#2B5B4D" : "#D8CFC2";
+          const checked = state.checkedAnswers[key];
+          let feedbackHtml = "";
+          if (checked && !isRevealed) {
+            if (checked.status === "correct") {
+              feedbackHtml = `<div class="feedback-box correct">✅ Correto! Muito bem.</div>`;
+            } else if (checked.status === "close") {
+              feedbackHtml = `<div class="feedback-box close">🤔 ${checked.message}</div>`;
+            } else {
+              feedbackHtml = `<div class="feedback-box incorrect">❌ Não é isso ainda. Tenta de novo ou vê a dica abaixo.</div>`;
+            }
+          }
+          return `
+            <div class="exercise-card ${isDone ? "done" : ""}">
+              <div class="exercise-top">
+                <p class="exercise-q"><span class="exercise-num">${i + 1}.</span> ${ex.q}${isDone ? `<span class="xp-pill">+${XP_EXERCISE_FIRST_TRY} XP</span>` : ""}</p>
+                <button class="check-btn" onclick="toggleExercise(${state.activeModule}, ${i})" style="color:${iconColor};">
+                  ${isDone ? icons.check.replace('width="16"','width="20"').replace('height="16"','height="20"') : icons.circle.replace('width="16"','width="20"').replace('height="16"','height="20"')}
+                </button>
+              </div>
+              <div style="display:flex; gap:8px; margin-bottom:8px;">
+                <input class="em-input" placeholder="Escreve a tua resposta..." value="${(state.answers[key] || "").replace(/"/g, "&quot;")}" oninput="updateAnswer('${key}', this.value)" onkeydown="if(event.key==='Enter'){checkAnswer(${state.activeModule}, ${i})}" />
+                <button class="check-answer-btn" onclick="checkAnswer(${state.activeModule}, ${i})">Verificar</button>
+              </div>
+              ${feedbackHtml}
+              <div class="exercise-bottom">
+                <button class="reveal-btn" onclick="toggleReveal('${key}')">${isRevealed ? "Esconder resposta" : "Ver resposta e dica"}</button>
+                ${isRevealed ? `<div class="reveal-content"><strong style="color:#2B5B4D;">Resposta:</strong> ${ex.a} — <em>${ex.hint}</em></div>` : ""}
+              </div>
+            </div>
+          `;
+        }).join("")}
+        ${moduleDoneCount(state.activeModule) === mod.exercises.length ? `
+          <div class="module-complete-banner">
+            <div class="big">🎉 Todos os exercícios deste módulo concluídos!</div>
+            <div class="small">Marca o módulo como concluído acima para ganhares +${XP_MODULE_COMPLETE} XP e desbloquear a próxima conquista.</div>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  } else if (state.view === "matching") {
+    // Initialize shuffled right order if needed
+    if (!state.matchRightOrder) {
+      const order = mod.matchingGame.map((_, i) => i);
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      state.matchRightOrder = order; // mutate directly, no re-render needed yet
+    }
+    const allMatched = Object.keys(state.matchMatched).length === mod.matchingGame.length;
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">Jogo de Associação</h3>
+        <p style="color:#8A8378; font-size:14px; margin-bottom:18px;">Clica numa expressão à esquerda e no significado correspondente à direita.</p>
+        <div class="match-grid">
+          <div>
+            <div class="match-col-label">Expressão</div>
+            ${mod.matchingGame.map((item, idx) => {
+              const isMatched = state.matchMatched[idx] !== undefined;
+              const isSelected = state.matchSelected.side === "left" && state.matchSelected.idx === idx;
+              const isWrong = state.matchWrong && state.matchWrong.leftIdx === idx;
+              let cls = "match-item";
+              if (isMatched) cls += " matched";
+              else if (isSelected) cls += " selected";
+              if (isWrong) cls += " wrong";
+              return `<div class="${cls}" onclick="matchSelect('left', ${idx})">${item.left}</div>`;
+            }).join("")}
+          </div>
+          <div>
+            <div class="match-col-label">Significado</div>
+            ${state.matchRightOrder.map((origIdx) => {
+              const item = mod.matchingGame[origIdx];
+              const isMatched = state.matchMatched[origIdx] !== undefined;
+              const isSelected = state.matchSelected.side === "right" && state.matchSelected.idx === origIdx;
+              const isWrong = state.matchWrong && state.matchWrong.rightIdx === origIdx;
+              let cls = "match-item";
+              if (isMatched) cls += " matched";
+              else if (isSelected) cls += " selected";
+              if (isWrong) cls += " wrong";
+              return `<div class="${cls}" onclick="matchSelect('right', ${origIdx})">${item.right}</div>`;
+            }).join("")}
+          </div>
+        </div>
+        ${allMatched ? `
+          <div class="module-complete-banner" style="margin-top:18px;">
+            <div class="big">🧩 Associaste todas as expressões!</div>
+            <div class="small">+${XP_MATCHING_GAME} XP ${state.progress.completedGames[`${state.activeModule}-matching`] ? "(já recolhido)" : "ganho"}</div>
+          </div>
+        ` : `<div class="match-progress">${Object.keys(state.matchMatched).length} / ${mod.matchingGame.length} associadas</div>`}
+      </div>
+    `;
+  } else if (state.view === "errors") {
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">Encontra o Erro</h3>
+        <p style="color:#8A8378; font-size:14px; margin-bottom:18px;">Cada frase tem um erro. Clica na palavra ou expressão que está errada.</p>
+        ${mod.errorSpotting.map((item, exIdx) => {
+          const pick = state.errorPicks[exIdx];
+          // Tokenize: split on spaces but keep punctuation simple
+          const words = item.text.split(" ");
+          // Build clickable spans - try to match multi-word error phrases too
+          const errorWords = item.error.split(" ");
+          let html = "";
+          let i = 0;
+          while (i < words.length) {
+            // check if this position starts the multi-word error
+            const slice = words.slice(i, i + errorWords.length).join(" ").replace(/[.,!?]$/, "");
+            if (slice.toLowerCase() === item.error.toLowerCase() && !pick) {
+              html += `<span class="error-word" style="display:inline; margin:0 2px;" onclick="pickErrorWord(${exIdx}, '${item.error.replace(/'/g, "\\'")}')">${words.slice(i, i + errorWords.length).join(" ")}</span> `;
+              i += errorWords.length;
+            } else if (slice.toLowerCase() === item.error.toLowerCase() && pick) {
+              const cls = pick.correct ? "highlight" : "";
+              html += `<span class="${cls}">${words.slice(i, i + errorWords.length).join(" ")}</span> `;
+              i += errorWords.length;
+            } else {
+              const w = words[i];
+              if (!pick) {
+                html += `<span class="error-word" style="display:inline; margin:0 2px;" onclick="pickErrorWord(${exIdx}, '${w.replace(/[.,!?]$/, "").replace(/'/g, "\\'")}')">${w}</span> `;
+              } else {
+                html += `${w} `;
+              }
+              i += 1;
+            }
+          }
+          return `
+            <div class="error-card em-card">
+              <div class="error-text">${html}</div>
+              ${pick ? `
+                <div class="error-solution">
+                  ${pick.correct ? "✅ Encontraste! " : "❌ Não é essa. "}
+                  <strong>Correção:</strong> "${item.error}" → "${item.fix}". ${item.explanation}
+                  ${!pick.correct ? `<div style="margin-top:8px;"><button class="reveal-btn" onclick="pickErrorWord(${exIdx}, '')" style="color:#A8453E;">Tentar de novo</button></div>` : ""}
+                </div>
+              ` : ""}
+            </div>
+          `;
+        }).join("")}
+      </div>
+    `;
+  } else if (state.view === "scenario") {
+    const sc = mod.scenario;
+    const scenarioKey = `${state.activeModule}-scenario`;
+    const isDone = state.progress.completedGames[scenarioKey];
+    viewHtml = `
+      <div class="em-card content-card">
+        <h3 class="section-title">${sc.title}</h3>
+        <div class="scenario-setup">${sc.setup}</div>
+        ${sc.dialogue.map((line, idx) => {
+          if (!line.blank) {
+            return `
+              <div class="chat-bubble them">
+                <div class="chat-speaker">${line.speaker}</div>
+                ${line.line}
+              </div>
+            `;
+          } else {
+            const key = `${state.activeModule}-${idx}`;
+            const exShown = state.scenarioExampleShown[key];
+            return `
+              <div class="chat-blank-area">
+                <div class="chat-speaker" style="text-align:right; margin-bottom:4px; color:#8A8378;">${line.speaker}</div>
+                <textarea class="chat-textarea" placeholder="Escreve a tua resposta em inglês..." oninput="updateScenarioAnswer('${key}', this.value)">${state.scenarioAnswers[key] || ""}</textarea>
+                <p class="scenario-hint">💡 ${line.hint}</p>
+                <button class="scenario-example-toggle" onclick="toggleScenarioExample('${key}')">${exShown ? "Esconder exemplo" : "Ver exemplo de resposta"}</button>
+                ${exShown ? `<div class="scenario-example">${line.example}</div>` : ""}
+              </div>
+            `;
+          }
+        }).join("")}
+        <div style="margin-top:18px; text-align:center;">
+          ${isDone ? `
+            <div class="module-complete-banner">
+              <div class="big">🎭 Cenário concluído!</div>
+              <div class="small">+${XP_SCENARIO} XP já recolhido. Podes copiar as tuas respostas para o chat e pedir feedback à IA.</div>
+            </div>
+          ` : `
+            <button class="check-answer-btn" onclick="completeScenario(${state.activeModule})">Marcar cenário como concluído (+${XP_SCENARIO} XP)</button>
+          `}
+        </div>
+      </div>
+    `;
+  } else if (state.view === "training") {
+    viewHtml = `
+      <div>
+        <div class="em-card content-card" style="margin-bottom:16px;">
+          <h3 class="section-title">Como usar o teu tempo (15-30 min/dia)</h3>
+          <div style="display:grid; gap:10px; font-size:14.5px; color:#4A463F; line-height:1.6;">
+            <div><strong>Dias 1-2 (Gramática, ~20 min):</strong> Lê a explicação do módulo, depois pede exercícios extra à IA.</div>
+            <div><strong>Dias 3-4 (Conversação, ~15-20 min):</strong> Usa o Prompt #1 para simular uma conversa sobre o tema do módulo.</div>
+            <div><strong>Dia 5 (Escrita, ~15 min):</strong> Escreve um texto curto e usa o Prompt #2 para feedback.</div>
+            <div><strong>Fim de semana (~10-15 min):</strong> Pratica as expressões idiomáticas em frases próprias.</div>
+          </div>
+        </div>
+        <h3 class="section-title">Prompts de treino — copia e usa com a IA</h3>
+        ${TRAINING_PROMPTS.map(p => `
+          <div class="em-card training-card">
+            <div class="training-head">
+              <div class="training-icon">${p.icon}</div>
+              <strong class="training-title">${p.title}</strong>
+            </div>
+            <p class="training-text">${p.text}</p>
+            <button class="copy-btn" onclick="copyPrompt(\`${p.text.replace(/`/g, "'")}\`)">Copiar prompt</button>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  const completeBtnClass = state.progress.completedModules[state.activeModule] ? "complete-btn done" : "complete-btn";
+  const completeBtnIcon = state.progress.completedModules[state.activeModule] ? icons.check : icons.circle;
+  const completeBtnText = state.progress.completedModules[state.activeModule] ? "Módulo concluído" : "Marcar módulo concluído";
+
+  const xp = state.progress.xp || 0;
+  const streak = state.progress.streak || 0;
+  const earnedCount = Object.keys(state.progress.earnedBadges || {}).length;
+
+  app.innerHTML = `
+    ${state.xpToast ? `
+      <div class="xp-toast">
+        ${state.xpToast.isModule ? "🎉" : "⭐"} +${state.xpToast.amount} XP ${state.xpToast.isModule ? "— Módulo concluído!" : ""}
+      </div>
+    ` : ""}
+    ${state.newBadgeToast ? `
+      <div class="xp-toast" style="background:#9C7A3C;">
+        ${state.newBadgeToast.icon} Nova conquista: ${state.newBadgeToast.name}!
+      </div>
+    ` : ""}
+    <header class="app-header">
+      <div class="header-inner">
+        <div>
+          <div class="eyebrow">Plano de Curso · 12 semanas</div>
+          <h1 class="title">English in Motion</h1>
+          <p class="subtitle">Da comunicação funcional à fluência natural — B1 para B2.</p>
+          <div class="badges-row">
+            ${BADGES.map(b => {
+              const earned = state.progress.earnedBadges && state.progress.earnedBadges[b.id];
+              return `<span class="badge ${earned ? "" : "locked"}" title="${b.name}">${b.icon} ${b.name}</span>`;
+            }).join("")}
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div class="progress-label">
+            Progresso geral
+            <span style="font-size:11px; color:${state.syncStatus === "error" ? "#E89B8E" : "#7BB89F"};">${syncLabel()}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+            <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${overallPct}%;"></div></div>
+            <span class="progress-pct">${overallPct}%</span>
+          </div>
+          <div class="stats-row" style="margin-top:10px;">
+            <div class="stat-chip">
+              <span class="streak-flame ${streak > 0 ? "" : "cold"}">🔥</span>
+              <span class="stat-value">${streak}</span> dias
+            </div>
+            <div class="stat-chip">
+              <span>⭐</span>
+              <span class="stat-value">${xp}</span> XP
+            </div>
+          </div>
+          <button class="em-btn" onclick="handleLogout()" style="background:none; color:#9FCBBA; font-size:12px; margin-top:8px; border:none; cursor:pointer; text-decoration:underline;">Sair (${state.user.displayName || state.user.email})</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside>
+        <div class="em-card sidebar-card">${sidebarHtml}</div>
+        <button class="em-btn reset-btn" onclick="resetProgress()">${icons.reset} Reiniciar progresso</button>
+      </aside>
+
+      <main>
+        <div class="em-card module-header">
+          <div class="module-header-inner">
+            <div>
+              <div class="em-pill">${mod.range}</div>
+              <h2 class="module-title" style="margin-top:10px;">Módulo ${mod.id}: ${mod.title}</h2>
+              <p class="module-theme">${mod.theme}</p>
+            </div>
+            <button class="em-btn ${completeBtnClass}" onclick="toggleModuleComplete(${state.activeModule})">
+              ${completeBtnIcon} ${completeBtnText}
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs-row">${tabsHtml}</div>
+
+        ${viewHtml}
+
+        <div class="nav-row">
+          <button class="em-btn nav-btn prev" onclick="prevModule()" ${state.activeModule === 0 ? "disabled" : ""}>${icons.prev} Anterior</button>
+          <button class="em-btn nav-btn next" onclick="nextModule()" ${state.activeModule === MODULES.length - 1 ? "disabled" : ""}>Próximo módulo ${icons.next}</button>
+        </div>
+      </main>
+    </div>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>
