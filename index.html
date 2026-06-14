@@ -576,6 +576,24 @@ const TRAINING_PROMPTS = [
   }
 ];
 
+const ADVANCED_PROMPTS = [
+  {
+    icon: "🎭",
+    title: "Roleplay com Personagem",
+    text: "Quero fazer um roleplay. Faz de [personagem — ex: 'um entrevistador numa entrevista de emprego', 'um colega de trabalho difícil que está sempre a discordar', 'um recepcionista de hotel']. O cenário é: [contexto]. Fala só em inglês, mantém o personagem, e não me corrijas durante a conversa — no fim, dás-me um resumo dos erros e sugestões."
+  },
+  {
+    icon: "⚡",
+    title: "Correção em Tempo Real",
+    text: "Vamos conversar em inglês sobre [tema]. Desta vez quero que me corrijas IMEDIATAMENTE após cada frase minha — antes de continuares a conversa, diz-me se a frase está correta e, se não, qual seria a versão correta. Depois continua a conversa normalmente."
+  },
+  {
+    icon: "🎯",
+    title: "Desafio Diário de Tradução",
+    text: "Quero fazer um desafio de tradução rápida. Dá-me uma frase em português (relacionada com o Módulo [X]) e eu tenho de a traduzir para inglês. Dá-me 5 frases, uma a uma — só avanças para a próxima depois de eu responder, e diz-me se está certo ou como melhorar."
+  }
+];
+
 /* =========================================================
    3) ÍCONES SVG simples (substituem lucide-react)
    ========================================================= */
@@ -1280,6 +1298,19 @@ function render() {
         </div>
         <h3 class="section-title">Prompts de treino — copia e usa com a IA</h3>
         ${TRAINING_PROMPTS.map(p => `
+          <div class="em-card training-card">
+            <div class="training-head">
+              <div class="training-icon">${p.icon}</div>
+              <strong class="training-title">${p.title}</strong>
+            </div>
+            <p class="training-text">${p.text}</p>
+            <button class="copy-btn" onclick="copyPrompt(\`${p.text.replace(/`/g, "'")}\`)">Copiar prompt</button>
+          </div>
+        `).join("")}
+
+        <h3 class="section-title" style="margin-top:24px;">Prompts avançados — para quando já dominares o vocabulário do módulo</h3>
+        <p style="color:#8A8378; font-size:13.5px; margin-bottom:14px; margin-top:-6px;">Estes prompts assumem que já estudaste a gramática, vocabulário e idioms do módulo atual — usa-os para consolidar e ganhar confiança a falar.</p>
+        ${ADVANCED_PROMPTS.map(p => `
           <div class="em-card training-card">
             <div class="training-head">
               <div class="training-icon">${p.icon}</div>
